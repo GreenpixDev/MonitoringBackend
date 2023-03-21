@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <property name="LOG_DIR" value="logs/" />
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <Pattern>[%d{HH:mm:ss.SSS}] [%thread] [%level] %logger{15} - %msg%n</Pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}latest.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+            <maxHistory>3</maxHistory>
+            <totalSizeCap>8MB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <Pattern>[%d{dd MM yyyy HH:mm:ss.SSS}] [%thread] [%level] %logger{36} - %msg%n</Pattern>
+        </encoder>
+    </appender>
+
+    <logger name="ru.cft.shiftlab.digitalfootprint" level="debug" additivity="false">
+        <appender-ref ref="FILE"/>
+    </logger>
+
+    <root level="info">
+        <appender-ref ref="FILE"/>
+    </root>
+
+    <root level="info">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+</configuration>

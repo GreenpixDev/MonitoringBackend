@@ -1,0 +1,74 @@
+logging:
+  level:
+    io.r2dbc.postgresql.QUERY: ${R2DBC_LOGGING:INFO} # for queries
+    io.r2dbc.postgresql.PARAM: ${R2DBC_LOGGING:INFO} # for parameters
+
+springdoc:
+  swagger-ui:
+    path: /swagger
+    enabled: ${SWAGGER:false}
+
+server:
+  error:
+    include-message: always
+
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://${DB_HOST:localhost}:5432/monitoring
+    username: ${POSTGRES_USER:postgres}
+    password: ${POSTGRES_PASSWORD:postgres}
+  flyway:
+    url: jdbc:postgresql://${DB_HOST:localhost}:5432/monitoring
+    user: ${POSTGRES_USER:postgres}
+    password: ${POSTGRES_PASSWORD:postgres}
+  jackson:
+    date-format: "yyyy-MM-dd HH:mm:ss.SSS"
+    time-zone: "GMT+8"
+  mail:
+    host: ${SMTP_HOST:smtp.new-servers.ru}
+    username: ${SMTP_USERNAME}
+    password: ${SMTP_PASSWORD}
+    properties:
+      mail:
+        transport:
+          protocol: smtp
+        smtp:
+          port: 465
+          auth: false
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 500
+          ssl:
+            enable: true
+            trust: "*"
+    jwt:
+      secret: ${MAIL_SECRET}
+      expiration: 3600
+
+security:
+  bcrypt:
+    version: 2a
+    strength: 10
+  jwt:
+    secret: ${JWT_SECRET}
+    expiration: 28800
+  restore_seconds_limit: 3600
+
+webclient:
+  connect-timeout: 5000
+  read-timeout: 5000
+  write-timeout: 5000
+  buffer-size: 20971520
+
+google:
+  recaptcha:
+    key:
+      site: ${RECAPTCHA_SITE:6Lfw2FgkAAAAAMPoYcLrvAoTPRqulboe1E3T3JXq}
+      secret: ${RECAPTCHA_SECRET:6Lfw2FgkAAAAAIevTp2zKrqZeQ0AEthxnCNHIG5A}
+
+monitoring:
+  server_seconds_limit: 1200
+
+backends:
+  pinger-url: http://${PINGER_HOST:localhost:8081}
+  bridge-url: http://${BRIDGE_HOST:localhost:8082}
