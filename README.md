@@ -14,6 +14,8 @@
 * Backend - сервис для хранения списка серверов, регистрации пользователей (текущий репозиторий)
 * Pinger - сервис для проверки статусов серверов (https://github.com/GreenpixDev/MonitoringPinger)
 
+![Dependency Visualizer-Страница 5 drawio (1)](https://user-images.githubusercontent.com/58062046/227698060-295aa234-1ede-459f-bfea-478a72627a7c.png)
+
 ## Стек и технологии
 При разработке использовались данные технологии:
 * [Kotlin](https://kotlinlang.org/)
